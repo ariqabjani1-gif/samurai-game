@@ -70,7 +70,7 @@ function render(){
 document.getElementById('attack').addEventListener('click',()=>{
  if(Math.abs(enemyX-px)>30){msg.textContent='Move closer!';return;}
  enemyHP-=10; msg.textContent='You hit for 10!';
- if(enemyHP<=0){wave++; if(wave>25){document.getElementById('endTitle').textContent='VICTORY';document.getElementById('gameover').style.display='flex';return} enemyMax=100+(wave-1)*30;enemyHP=enemyMax;msg.textContent='WAVE '+wave+'! Enemy HP '+enemyMax;}
+ if(enemyHP<=0){wave++; playerHP=Math.min(100,playerHP+10); if(wave>25){document.getElementById('endTitle').textContent='VICTORY';document.getElementById('gameover').style.display='flex';return} enemyMax=100+(wave-1)*30;enemyHP=enemyMax;msg.textContent='WAVE '+wave+'! +10 HEALTH • Enemy HP '+enemyMax;}
  render();
 });
 const block=document.getElementById('block');
