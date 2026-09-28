@@ -57,20 +57,20 @@ button{color:white;background:#111d;border:3px solid #8c8378;font-weight:900;tou
  <div id="gameover"><h1 id="endTitle">DEFEATED</h1><button onclick="location.reload()">PLAY AGAIN</button></div>
 </div>
 <script>
-let playerHP=100, wave=1, enemyMax=100, enemyHP=100, blocking=false, px=16;
+let playerHP=100,playerMaxHP=100, wave=1, enemyMax=100, enemyHP=100, blocking=false, px=16;
 const player=document.getElementById('player'), enemy=document.getElementById('enemy');
 const pf=document.getElementById('playerFill'), pt=document.getElementById('playerText');
 const ef=document.getElementById('enemyFill'), et=document.getElementById('enemyText');
 const wt=document.getElementById('waveText'), msg=document.getElementById('message');
 function render(){
- pf.style.width=Math.max(0,playerHP)+'%'; pt.textContent=Math.max(0,playerHP)+' / 100';
+ pf.style.width=Math.max(0,playerHP/playerMaxHP*100)+'%'; pt.textContent=Math.max(0,playerHP)+' / '+playerMaxHP;
  ef.style.width=Math.max(0,enemyHP/enemyMax*100)+'%'; et.textContent=Math.max(0,enemyHP)+' / '+enemyMax;
  wt.textContent='ENEMY • WAVE '+wave;
 }
 document.getElementById('attack').addEventListener('click',()=>{
  if(Math.abs(enemyX-px)>30){msg.textContent='Move closer!';return;}
  enemyHP-=10; msg.textContent='You hit for 10!';
- if(enemyHP<=0){wave++; playerHP=playerHP+10; if(wave>25){document.getElementById('endTitle').textContent='VICTORY';document.getElementById('gameover').style.display='flex';return} enemyMax=100+(wave-1)*30;enemyHP=enemyMax;msg.textContent='WAVE '+wave+'! +10 HEALTH • Enemy HP '+enemyMax;}
+ if(enemyHP<=0){wave++; playerMaxHP+=10;playerHP+=10;if(wave>25){document.getElementById('endTitle').textContent='VICTORY';document.getElementById('gameover').style.display='flex';return} enemyMax=100+(wave-1)*30;enemyHP=enemyMax;msg.textContent='WAVE '+wave+'! +10 HEALTH • Enemy HP '+enemyMax;}
  render();
 });
 const block=document.getElementById('block');
